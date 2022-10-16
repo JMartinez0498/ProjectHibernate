@@ -16,7 +16,7 @@ import sv.edu.udb.www.utils.JsfUtils;
 
 /**
  *
- * @author Daniel
+ * @author Jeffrey
  */
 @ManagedBean
 @RequestScoped

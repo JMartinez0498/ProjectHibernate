@@ -15,7 +15,7 @@ import sv.edu.udb.www.entities.Libros;
 
 /**
  *
- * @author Daniel
+ * @author Jeffrey
  */
 public class LibrosModel {
     SessionFactory factory = HibernateUtil.getSessionFactory();
