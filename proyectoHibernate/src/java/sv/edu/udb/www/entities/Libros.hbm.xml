@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 02-nov-2017 18:39:34 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="sv.edu.udb.www.entities.Libros" table="libros" catalog="inventario_libros" optimistic-lock="version">
+        <id name="codigoLibro" type="string">
+            <column name="codigo_libro" length="9" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="autores" class="sv.edu.udb.www.entities.Autores" fetch="select" lazy="false" >
+            <column name="codigo_autor" length="6" not-null="true" />
+        </many-to-one>
+        <many-to-one name="editoriales" class="sv.edu.udb.www.entities.Editoriales" fetch="select" lazy="false">
+            <column name="codigo_editorial" length="6" not-null="true" />
+        </many-to-one>
+        <many-to-one name="generos" class="sv.edu.udb.www.entities.Generos" fetch="select" lazy="false">
+            <column name="id_genero" not-null="true" />
+        </many-to-one>
+        <property name="nombreLibro" type="string">
+            <column name="nombre_libro" length="50" not-null="true" />
+        </property>
+        <property name="existencias" type="int">
+            <column name="existencias" not-null="true" />
+        </property>
+        <property name="precio" type="big_decimal">
+            <column name="precio" precision="10" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>

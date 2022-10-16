@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../WEB-INF/template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="titulo">
+        Lista de libros
+    </ui:define>
+
+    <ui:define name="contenido">
+        <div class="row">
+            <div class="col-md-10">
+                <h:button outcome="nuevoLibro" value="Nuevo Libro" class="btn btn-primary btn-md"/>
+                <br/><br/>
+                <h:form prependId="false">
+                    <h:dataTable value="#{librosBean.listaLibros}" var="item"
+                                 id="tabla"  class="table table-striped table-bordered table-hover">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Codigo"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codigoLibro}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nombre del libro"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombreLibro}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Existencias"/>
+                            </f:facet>
+                            <h:outputText value="#{item.existencias}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Precio"/>
+                            </f:facet>
+                            <h:outputText value="#{item.precio}"/>
+                        </h:column>
+                         <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Autor"/>
+                            </f:facet>
+                             <h:outputText value="#{item.autores.nombreAutor}"/>
+                        </h:column>
+                         <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Editorial"/>
+                            </f:facet>
+                             <h:outputText value="#{item.editoriales.nombreEditorial}"/>
+                        </h:column>
+                         <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Genero"/>
+                            </f:facet>
+                             <h:outputText value="#{item.generos.nombreGenero}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Operaciones"/>
+                            </f:facet>
+                            <h:commandLink class="btn btn-primary" action="#{librosBean.obtener()}">
+                                <i class="glyphicon glyphicon-edit"></i> Editar
+                                <f:param name="codigo" value="#{item.codigoLibro}"/>
+                            </h:commandLink>
+                            <h:commandLink type="button" class="btn btn-danger" style="margin-left: 5px;" 
+                                           action="#{librosBean.eliminar()}"
+                                           onclick="return confirmarEliminacion();">
+                                <i class="glyphicon glyphicon-trash"></i> Eliminar
+                                <f:param name="codigo" value="#{item.codigoLibro}"/>
+                            </h:commandLink>
+
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                $('#tabla').dataTable({
+                    "language": {
+                        "url": "https://cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                    }
+                });
+
+            });
+
+            function confirmarEliminacion() {
+             confirm("¿Deseas eliminar este registro?");
+  
+            }
+        </script>
+    </ui:define>
+
+</ui:composition>

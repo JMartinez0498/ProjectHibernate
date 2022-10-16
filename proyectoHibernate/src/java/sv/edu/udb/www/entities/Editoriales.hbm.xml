@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 02-nov-2017 18:39:34 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="sv.edu.udb.www.entities.Editoriales" table="editoriales" catalog="inventario_libros" optimistic-lock="version">
+        <id name="codigoEditorial" type="string">
+            <column name="codigo_editorial" length="6"/>
+            <generator class="assigned" />
+        </id>
+        <property name="nombreEditorial" type="string">
+            <column name="nombre_editorial" length="30" not-null="true" />
+        </property>
+        <property name="contacto" type="string">
+            <column name="contacto" length="30" not-null="true" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="9" not-null="true" />
+        </property>
+        <set name="libroses" table="libros" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="codigo_editorial" length="6" not-null="true" />
+            </key>
+            <one-to-many class="sv.edu.udb.www.entities.Libros" />
+        </set>
+    </class>
+</hibernate-mapping>
